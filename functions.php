@@ -176,7 +176,7 @@ require_once('includes/wp_custom_post_type.php');
     ADD CUSTOM THEME CONTROLS
 -------------------------------------------------------------- */
 
-//require_once('includes/wp_custom_theme_control.php');
+require_once('includes/wp_custom_theme_control.php');
 
 /* --------------------------------------------------------------
     ADD CUSTOM IMAGE SIZE

@@ -1,3 +1,4 @@
+// compress: false, strictMath: true, javascriptEnabled: true
 /* --------------------------------------------------------------
 /* MAIN LESS MIXINS AND FUNCTIONS - LESSHAT
 -------------------------------------------------------------- */
@@ -16,24 +17,55 @@ Variables
 @white: #ffffff;
 @blue: #2B7BCB;
 @orange: #FFB12A;
+@montserrat: 'Montserrat', sans-serif;
+@karla: 'Karla', sans-serif;
 
 /* --------------------------------------------------------------
 Body default
 -------------------------------------------------------------- */
-html, body { height: 100%; }
+html,
+body {
+    height: 100%;
+}
 
 body {
     font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+    font-family: @karla;
 }
 
 a {
     .transition(all .2s ease-in-out);
 
-    &:hover { text-decoration: none; }
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 
 .page-container {
     min-height: 85vh;
+}
+
+
+/* --------------------------------------------------------------
+1.- HEADER
+-------------------------------------------------------------- */
+.the-header {
+    z-index: 999;
+
+    & .img-logo {
+        max-width: 100px;
+    }
+}
+
+
+/* --------------------------------------------------------------
+2.- FOOTER
+-------------------------------------------------------------- */
+
+/* --------------------------------------------------------------
+3.- HOME
+-------------------------------------------------------------- */
+.the-slider {
+    margin-top: -75px;
 }
