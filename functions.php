@@ -263,7 +263,7 @@ function ajax_send_contact_form_handler() {
     //    if ($_POST["g-recaptcha-response"]) {
     //        $post_data = http_build_query(
     //            array(
-    //                'secret' => '6LcxZnMUAAAAAEizWfI29vgsVyezhGxBl0hQJXzQ',
+    //                'secret' => 'secret',
     //                'response' => $_POST['g-recaptcha-response'],
     //                'remoteip' => $_SERVER['REMOTE_ADDR']
     //            ), '', '&');
