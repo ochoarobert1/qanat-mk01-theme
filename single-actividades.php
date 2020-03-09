@@ -10,8 +10,11 @@
         <section id="post-<?php the_ID(); ?>" class="page-container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" role="article" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="container">
                 <div class="row">
-                    <div class="section-container col-12">
+                    <div class="section-container col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                         <?php the_content(); ?>
+                    </div>
+                    <div class="section-container col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                        <?php the_post_thumbnail('full', array('class' => 'img-fluid')); ?>
                     </div>
                 </div>
             </div>

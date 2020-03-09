@@ -53,8 +53,8 @@ function qanat_load_js() {
             //wp_enqueue_script('masonry');
 
             /*- OWL ON LOCAL -*/
-            //wp_register_script('owl-js', get_template_directory_uri() . '/js/owl.carousel.min.js', array('jquery'), '2.3.4', true);
-            //wp_enqueue_script('owl-js');
+            wp_register_script('owl-js', get_template_directory_uri() . '/js/owl.carousel.min.js', array('jquery'), '2.3.4', true);
+            wp_enqueue_script('owl-js');
 
             /*- WOW ON LOCAL -*/
             //wp_register_script('wow-js', get_template_directory_uri() . '/js/wow.min.js', array('jquery'), '1.1.3', true);
@@ -115,8 +115,8 @@ function qanat_load_js() {
             //wp_enqueue_script('masonry');
 
             /*- OWL CAROUSEL -*/
-            //wp_register_script('owl-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), '2.3.4', true);
-            //wp_enqueue_script('owl-js');
+            wp_register_script('owl-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), '2.3.4', true);
+            wp_enqueue_script('owl-js');
 
             /*- WOW -*/
             //wp_register_script('wow-js', 'https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js', array('jquery'), '1.1.2', true);
@@ -127,10 +127,27 @@ function qanat_load_js() {
             wp_enqueue_script('aos-js');
 
         }
+        
+        /*- JQUERY COOKIE -*/
+        wp_enqueue_script( 'jquery-cookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [ 'jquery' ], '1.0.3', true );
 
         /*- MAIN FUNCTIONS -*/
-        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.js', array('jquery'), $version_remove, true);
+        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.js', array('jquery', 'jquery-cookie'), $version_remove, true);
         wp_enqueue_script('main-functions');
+
+        /* LOCALIZE MAIN SHORTCODE SCRIPT */
+        wp_localize_script( 'main-functions', 'admin_url', array(
+            'ajax_custom_url' => admin_url('admin-ajax.php'),
+            'error_name' => __('Error: El nombre no puede estar vacio', 'qanat'),
+            'invalid_name' => __('Error: El nombre debe ser válido', 'qanat'),
+            'error_email' => __('Error: El correo no puede estar vacio', 'qanat'),
+            'invalid_email' => __('Error: El correo tiene un formato inválido', 'qanat'),
+            'error_subject' => __('Error: El asunto no puede estar vacio', 'qanat'),
+            'invalid_subject' => __('Error: El asunto debe ser válido', 'qanat'),
+            'error_message' => __('Error: El mensaje no puede estar vacio', 'qanat'),
+            'success_form' => __('Gracias por su mensaje, en breve le atenderemos.', 'qanat'),
+            'error_form' => __('Error: Intente de nuevo mas tarde.', 'qanat')
+        ));
 
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );

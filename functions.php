@@ -127,15 +127,15 @@ function qanat_widgets_init() {
         'after_title'   => '</h2>',
     ) );
 
-    //    register_sidebar( array(
-    //        'name' => __( 'Shop Sidebar', 'qanat' ),
-    //        'id' => 'shop_sidebar',
-    //        'description' => __( 'Estos widgets seran vistos en Tienda y Categorias de Producto', 'qanat' ),
-    //        'before_widget' => '<li id='%1$s' class='widget %2$s'>',
-    //        'after_widget'  => '</li>',
-    //        'before_title'  => '<h2 class='widgettitle'>',
-    //        'after_title'   => '</h2>',
-    //    ) );
+    register_sidebars( 4, array(
+        'name'          => __('Pie de Página %d', 'qanat'),
+        'id'            => 'sidebar_footer',
+        'description'   => __('Elementos del Pie de Página', 'qanat'),
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</li>',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>'
+    ) );
 }
 
 /* --------------------------------------------------------------
@@ -189,4 +189,200 @@ if ( function_exists('add_image_size') ) {
     add_image_size('avatar', 100, 100, true);
     add_image_size('blog_img', 276, 217, true);
     add_image_size('single_img', 636, 297, true );
+}
+
+
+add_action( 'pre_get_posts', 'qanat_client_archive_page' );
+// Show all Projects on Projects Archive Page
+function qanat_client_archive_page( $query ) {
+    if ( !is_admin() && $query->is_main_query() && is_post_type_archive('clientes') ) {
+        $query->set( 'posts_per_page', '-1' );
+    }
+
+    if ( !is_admin() && $query->is_main_query() && is_post_type_archive('publicaciones') ) {
+        $query->set( 'posts_per_page', '-1' );
+        $query->set( 'order', 'ASC' );
+        $query->set( 'orderby', 'date' );
+    }
+
+    if ( !is_admin() && $query->is_main_query() && is_tax('tipo-actividades') ) {
+        $query->set( 'posts_per_page', '-1' );
+        $query->set( 'order', 'ASC' );
+        $query->set( 'orderby', 'date' );
+    }
+}
+
+
+function image_uploader_enqueue() {
+    global $typenow;
+    if( ($typenow == 'actividades') ) {
+        wp_enqueue_media();
+
+        wp_register_script( 'meta-image', get_template_directory_uri() . '/js/admin-functions.js', array( 'jquery' ) );
+        wp_localize_script( 'meta-image', 'meta_image',
+                           array(
+                               'title' => 'Upload an Image',
+                               'button' => 'Use this Image',
+                           )
+                          );
+        wp_enqueue_script( 'meta-image' );
+    }
+}
+add_action( 'admin_enqueue_scripts', 'image_uploader_enqueue' );
+
+function excerpt($limit) {
+    $excerpt = explode(' ', get_the_excerpt(), $limit);
+    if (count($excerpt)>=$limit) {
+        array_pop($excerpt);
+        $excerpt = implode(" ",$excerpt).'...';
+    } else {
+        $excerpt = implode(" ",$excerpt);
+    }
+    $excerpt = preg_replace('`[[^]]*]`','',$excerpt);
+    return $excerpt;
+}
+
+
+/* --------------------------------------------------------------
+    AJAX SEND CONTACT FORM
+-------------------------------------------------------------- */
+add_action('wp_ajax_ajax_send_contact_form', 'ajax_send_contact_form_handler');
+add_action('wp_ajax_nopriv_ajax_send_contact_form', 'ajax_send_contact_form_handler');
+
+function ajax_send_contact_form_handler() {
+    parse_str($_POST['info'], $submit);
+
+    $contact_fields  = array(
+        'fullname' => __('Name', 'qanat'),
+        'email' => __('Email', 'qanat'),
+        'subject' => __('Subject', 'qanat'),
+        'message' => __('Message', 'qanat'),
+        'politics_acceptance' => ''
+    );
+
+    //    if ($_POST["g-recaptcha-response"]) {
+    //        $post_data = http_build_query(
+    //            array(
+    //                'secret' => '6LcxZnMUAAAAAEizWfI29vgsVyezhGxBl0hQJXzQ',
+    //                'response' => $_POST['g-recaptcha-response'],
+    //                'remoteip' => $_SERVER['REMOTE_ADDR']
+    //            ), '', '&');
+    //        $opts = array('http' =>
+    //                      array(
+    //                          'method'  => 'POST',
+    //                          'header'  => 'Content-type: application/x-www-form-urlencoded',
+    //                          'content' => $post_data
+    //                      )
+    //                     );
+    //        $context  = stream_context_create($opts);
+    //        $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+    //        $result = json_decode($response);
+    //    }
+    //    if($result->success == true) {
+
+    global $title;
+    $title = __('Qanat Ingeniería - Contact Message', 'qanat');
+
+    ob_start();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <?php global $title ?>
+    <title><?php echo $title ?></title>
+</head>
+
+<body>
+
+    <div style="color:#444; max-width: 600px; border: 1px solid #cccccc; padding: 15px; box-shadow: 0 0 2px #999999; margin: auto; font-family:Open-sans, sans-serif;">
+        <h2 style="margin-bottom: 2px; margin-top: 2px;"><?php echo $title ?></h2>
+        <p style="margin-top: 2px; margin-bottom: 2px"><?php _e('Sent', 'qanat'); ?>: <?php echo date("Y/m/d h:i") ?></p>
+        <hr style="border: solid 2px #444">
+        <div style="border: solid 1px #cccccc; background-color: #eeeeee; padding: 15px; margin-top: 15px;">
+            <?php
+        foreach ($contact_fields as $key => $field) {
+            if ($key != 'politics_acceptance') {
+                $field_value = apply_filters('mailto', $submit[$key]);
+                printf('<p style="margin: 5px 0;"><strong>%s</strong>: %s</p>', $field, $field_value);
+            }
+        }
+                ?>
+        </div>
+    </div>
+</body>
+
+</html>
+<?php
+    $content = ob_get_clean();
+
+    require_once ABSPATH . WPINC . '/class-phpmailer.php';
+    $mail = new PHPMailer();
+    $mail->AddAddress("info@qanatingenieria.com");
+    $mail->From = 'noreply@' . $_SERVER['SERVER_NAME'];
+    $mail->FromName = get_option('blogname');
+    $mail->Subject = $title;
+    $mail->Body = $content;
+    $mail->IsHTML();
+    $mail->CharSet = 'utf-8';
+
+    $result = $mail->Send();
+
+    if ($result) {
+        echo 'true';
+    } else {
+        echo 'false';
+    }
+
+    wp_die();
+}
+
+
+
+add_action('wp_ajax_ajax_get_activity_data', 'ajax_get_activity_data_handler');
+add_action('wp_ajax_nopriv_ajax_get_activity_data', 'ajax_get_activity_data_handler');
+
+function ajax_get_activity_data_handler() {
+    $act_id = $_POST['info'];
+    $post_act = get_post($act_id);
+    ob_start();
+?>
+<div class="activity-modal-picture">
+    <?php $featured_img_url = get_the_post_thumbnail_url($post_act->ID, 'full');  ?>
+    <img src="<?php echo $featured_img_url; ?>" alt="image" class="img-fluid" />
+</div>
+<div class="activity-modal-content">
+    <h2><?php echo $post_act->post_title; ?></h2>
+    <?php echo apply_filters('the_content', $post_act->post_content); ?>
+</div>
+<?php
+    $content = ob_get_clean();
+    echo $content;
+    wp_die();
+}
+
+
+function get_custom_terms($taxonomy) {
+    global $wpdb;
+
+    $ordered_array = array();
+
+    $results = $wpdb->get_results( "SELECT {$wpdb->prefix}term_taxonomy.term_taxonomy_id
+        from {$wpdb->prefix}term_taxonomy join {$wpdb->prefix}terms on ({$wpdb->prefix}term_taxonomy.term_id = {$wpdb->prefix}terms.term_id)
+        where {$wpdb->prefix}term_taxonomy.taxonomy = '{$taxonomy}'", OBJECT );
+
+
+    foreach ($results as $item) {
+
+
+        $result_item = $wpdb->get_row( "SELECT * FROM $wpdb->terms WHERE term_id = {$item->term_taxonomy_id}", ARRAY_A );
+
+        $ordered_array[$result_item['menu_order']] = $result_item['term_id'];
+
+
+    }
+
+    return $ordered_array;
 }

@@ -61,16 +61,61 @@
     <?php } ?>
     <header class="container-fluid p-0" role="banner" itemscope itemtype="http://schema.org/WPHeader">
         <div class="row no-gutters">
-            <div class="the-header col-12">
+            <?php $header_options = get_option('qanat_header_settings'); ?>
+            <?php $social_options = get_option('qanat_social_settings'); ?>
+            <div class="top-header col-12">
                 <div class="container">
                     <div class="row">
-                        <div class="top-header-left col-5"></div>
-                        <div class="top-header-right col-7">
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            <a href=""><i class="fa fa-phone"></i> </a>
-                            <a href=""><i class="fa fa-envelope-o"></i> </a>
+                        <div class="top-header-content col-xl-7 offset-xl-5 col-lg-8 offset-lg-4 col-md-12 col-sm-12 col-12 d-xl-block d-lg-block d-md-none d-sm-none d-none">
+                            <?php if (isset($social_options['facebook'])) { ?>
+                            <?php if ($social_options['facebook'] != '' ) { ?>
+                            <a href="<?php echo esc_url($social_options['facebook']);?>" title="<?php _e('Visíta nuestra página de Facebook', 'qanat'); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($social_options['twitter'])) { ?>
+                            <?php if ($social_options['twitter'] != '') { ?>
+                            <a href="<?php echo esc_url($social_options['twitter']);?>" title="<?php _e('Visíta nuestro perfil en Twitter', 'qanat'); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($social_options['instagram'])) { ?>
+                            <?php if ($social_options['instagram'] != '') { ?>
+                            <a href="<?php echo esc_url($social_options['instagram']);?>" title="<?php _e('Visita nuestro perfil en Instagram', 'qanat'); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($social_options['youtube'])) { ?>
+                            <?php if ($social_options['youtube'] != '') { ?>
+                            <a href="<?php echo esc_url($social_options['youtube']);?>" title="<?php _e('Visita nuestro canal en YouTube', 'qanat'); ?>" target="_blank"><i class="fa fa-youtube"></i></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($social_options['linkedin'])) { ?>
+                            <?php if ($social_options['linkedin'] != '') { ?>
+                            <a href="<?php echo esc_url($social_options['linkedin']);?>" title="<?php _e('Visita nuestra página en LinkedIn', 'qanat'); ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($header_options['phone_number'])) { ?>
+                            <?php if ($header_options['phone_number'] != '') { ?>
+                            <a href="tel:<?php echo esc_attr($header_options['phone_number']);?>" title="<?php _e('Haga click para llamar a nuestro master', 'qanat'); ?>" target="_blank"><i class="fa fa-phone"></i> <?php echo $header_options['formatted_phone_number'];?></a>
+                            <?php } ?>
+                            <?php } ?>
+
+                            <?php if (isset($header_options['email_address'])) { ?>
+                            <?php if ($header_options['email_address'] != '') { ?>
+                            <a href="mailto:<?php echo esc_attr($header_options['email_address']);?>" title="<?php _e('Haga click para enviarnos un correo electrónico', 'qanat'); ?>" target="_blank"><i class="fa fa-envelope-o"></i> <?php echo $header_options['email_address'];?></a>
+                            <?php } ?>
+                            <?php } ?>
                         </div>
-                        <div class="the-navbar col-12">
+                    </div>
+                </div>
+            </div>
+            <div class="the-header col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="the-navbar col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-xl-block d-lg-block d-md-none d-sm-none d-none">
                             <nav class="navbar navbar-expand-md navbar-light" role="navigation">
                                 <a class="navbar-brand" href="<?php echo home_url('/');?>" title="<?php echo get_bloginfo('name'); ?>">
                                     <?php if (!empty($image)) { ?>
@@ -92,12 +137,67 @@
                                         'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
                                         'walker'            => new WP_Bootstrap_Navwalker()
                                     ) );
-                                    ?>
+                                    $network_url = network_home_url();
 
+                                    ?>
+                                <ul class="lang-selector">
+                                    <li>
+                                        <a href="<?php echo $network_url; ?>" title="">ESP</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="<?php echo $network_url . 'en'; ?>" title="">ENG</a>
+                                    </li>
+
+                                </ul>
                             </nav>
+                        </div>
+                        <div class="navbar-mobile col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-xl-none d-lg-none d-md-block d-sm-block d-block">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6 col-4">
+                                    <a class="navbar-brand" href="<?php echo home_url('/');?>" title="<?php echo get_bloginfo('name'); ?>">
+                                        <?php if (!empty($image)) { ?>
+                                        <img src="<?php echo $image[0];?>" alt="<?php echo get_bloginfo('name'); ?>" class="img-fluid img-logo" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+                                <div class="navbar-mobile-actions col-sm-6 col-8">
+                                    <ul class="lang-selector">
+                                        <li>
+                                            <a href="<?php echo $network_url; ?>" title="">ESP</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="<?php echo $network_url . 'en'; ?>" title="">ENG</a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="menu-btn">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <div class="menu-mobile menu-mobile-hidden">
+        <div class="menu-mobile-wrapper menu-mobile-wrapper-hidden">
+            <div class="menu-btn-close">
+                <div class="menu-btn-close-wrapper">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <?php
+                wp_nav_menu( array(
+                    'theme_location'    => 'header_menu',
+                    'depth'             => 1
+                ) );
+                ?>
+        </div>
+    </div>

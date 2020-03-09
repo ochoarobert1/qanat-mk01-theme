@@ -93,13 +93,13 @@ function qanat_customize_register( $wp_customize ) {
 
 
     /* SOCIAL */
-    $wp_customize->add_section('sd_social_settings', array(
+    $wp_customize->add_section('qanat_social_settings', array(
         'title'    => __('Redes Sociales', 'qanat'),
         'description' => __('Agregue aqui las redes sociales de la página, serán usadas globalmente', 'qanat'),
         'priority' => 175,
     ));
 
-    $wp_customize->add_setting('sd_social_settings[facebook]', array(
+    $wp_customize->add_setting('qanat_social_settings[facebook]', array(
         'default'           => '',
         'sanitize_callback' => 'qanat_sanitize_url',
         'capability'        => 'edit_theme_options',
@@ -109,12 +109,12 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'facebook', array(
         'type' => 'url',
-        'section' => 'sd_social_settings',
-        'settings' => 'sd_social_settings[facebook]',
+        'section' => 'qanat_social_settings',
+        'settings' => 'qanat_social_settings[facebook]',
         'label' => __( 'Facebook', 'qanat' ),
     ) );
 
-    $wp_customize->add_setting('sd_social_settings[twitter]', array(
+    $wp_customize->add_setting('qanat_social_settings[twitter]', array(
         'default'           => '',
         'sanitize_callback' => 'qanat_sanitize_url',
         'capability'        => 'edit_theme_options',
@@ -124,12 +124,12 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'twitter', array(
         'type' => 'url',
-        'section' => 'sd_social_settings',
-        'settings' => 'sd_social_settings[twitter]',
+        'section' => 'qanat_social_settings',
+        'settings' => 'qanat_social_settings[twitter]',
         'label' => __( 'Twitter', 'qanat' ),
     ) );
 
-    $wp_customize->add_setting('sd_social_settings[instagram]', array(
+    $wp_customize->add_setting('qanat_social_settings[instagram]', array(
         'default'           => '',
         'sanitize_callback' => 'qanat_sanitize_url',
         'capability'        => 'edit_theme_options',
@@ -139,12 +139,12 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'instagram', array(
         'type' => 'url',
-        'section' => 'sd_social_settings',
-        'settings' => 'sd_social_settings[instagram]',
+        'section' => 'qanat_social_settings',
+        'settings' => 'qanat_social_settings[instagram]',
         'label' => __( 'Instagram', 'qanat' ),
     ) );
 
-    $wp_customize->add_setting('sd_social_settings[linkedin]', array(
+    $wp_customize->add_setting('qanat_social_settings[linkedin]', array(
         'default'           => '',
         'sanitize_callback' => 'qanat_sanitize_url',
         'capability'        => 'edit_theme_options',
@@ -154,12 +154,12 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'linkedin', array(
         'type' => 'url',
-        'section' => 'sd_social_settings',
-        'settings' => 'sd_social_settings[linkedin]',
+        'section' => 'qanat_social_settings',
+        'settings' => 'qanat_social_settings[linkedin]',
         'label' => __( 'LinkedIn', 'qanat' ),
     ) );
 
-    $wp_customize->add_setting('sd_social_settings[youtube]', array(
+    $wp_customize->add_setting('qanat_social_settings[youtube]', array(
         'default'           => '',
         'sanitize_callback' => 'qanat_sanitize_url',
         'capability'        => 'edit_theme_options',
@@ -169,19 +169,19 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'youtube', array(
         'type' => 'url',
-        'section' => 'sd_social_settings',
-        'settings' => 'sd_social_settings[youtube]',
+        'section' => 'qanat_social_settings',
+        'settings' => 'qanat_social_settings[youtube]',
         'label' => __( 'YouTube', 'qanat' ),
     ) );
 
 
-    $wp_customize->add_section('sd_cookie_settings', array(
+    $wp_customize->add_section('qanat_cookie_settings', array(
         'title'    => __('Cookies', 'qanat'),
         'description' => __('Opciones de Cookies', 'qanat'),
         'priority' => 176,
     ));
 
-    $wp_customize->add_setting('sd_cookie_settings[cookie_text]', array(
+    $wp_customize->add_setting('qanat_cookie_settings[cookie_text]', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
         'capability'        => 'edit_theme_options',
@@ -193,11 +193,11 @@ function qanat_customize_register( $wp_customize ) {
         'type' => 'textarea',
         'label'    => __('Cookie consent', 'qanat'),
         'description' => __( 'Texto del Cookie consent.' ),
-        'section'  => 'sd_cookie_settings',
-        'settings' => 'sd_cookie_settings[cookie_text]'
+        'section'  => 'qanat_cookie_settings',
+        'settings' => 'qanat_cookie_settings[cookie_text]'
     ));
 
-    $wp_customize->add_setting('sd_cookie_settings[cookie_link]', array(
+    $wp_customize->add_setting('qanat_cookie_settings[cookie_link]', array(
         'default'           => '',
         'sanitize_callback' => 'absint',
         'capability'        => 'edit_theme_options',
@@ -207,8 +207,8 @@ function qanat_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( 'cookie_link', array(
         'type'     => 'dropdown-pages',
-        'section' => 'sd_cookie_settings',
-        'settings' => 'sd_cookie_settings[cookie_link]',
+        'section' => 'qanat_cookie_settings',
+        'settings' => 'qanat_cookie_settings[cookie_link]',
         'label' => __( 'Link de Cookies', 'qanat' ),
     ) );
 
