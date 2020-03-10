@@ -321,6 +321,7 @@ function ajax_send_contact_form_handler() {
     require_once ABSPATH . WPINC . '/class-phpmailer.php';
     $mail = new PHPMailer();
     $mail->AddAddress("info@qanatingenieria.com");
+    $mail->AddAddress("david.castro@qanatingenieria.com");
     $mail->From = 'noreply@' . $_SERVER['SERVER_NAME'];
     $mail->FromName = get_option('blogname');
     $mail->Subject = $title;
