@@ -340,7 +340,9 @@ function ajax_send_contact_form_handler() {
     wp_die();
 }
 
-
+/* --------------------------------------------------------------
+    AJAX GET ACTIVITY DATA
+-------------------------------------------------------------- */
 
 add_action('wp_ajax_ajax_get_activity_data', 'ajax_get_activity_data_handler');
 add_action('wp_ajax_nopriv_ajax_get_activity_data', 'ajax_get_activity_data_handler');
@@ -364,6 +366,9 @@ function ajax_get_activity_data_handler() {
     wp_die();
 }
 
+/* --------------------------------------------------------------
+    GET CUSTOM TERMS
+-------------------------------------------------------------- */
 
 function get_custom_terms($taxonomy) {
     global $wpdb;
@@ -386,4 +391,113 @@ function get_custom_terms($taxonomy) {
     }
 
     return $ordered_array;
+}
+
+
+/* --------------------------------------------------------------
+    ADD COLUMN DATA
+-------------------------------------------------------------- */
+
+add_filter( 'manage_actividades_posts_columns', 'set_custom_edit_actividades_columns' );
+
+function set_custom_edit_actividades_columns( $columns ) {
+    unset( $columns['tipo-actividades'] );
+    $columns['qt_featured'] = __( 'Destacado', 'qanat' );
+
+
+    return $columns;
+}
+
+add_action( 'manage_actividades_posts_custom_column' , 'custom_actividades_column', 10, 2 );
+
+function custom_actividades_column( $column, $post_id ) {
+    switch ( $column ) {
+
+        case 'qt_featured' :
+            if ( get_post_meta( get_the_ID(), 'qt_featured', 1 ) ) { _e('Si', 'qanat'); } else { _e('No', 'qanat'); } 
+            break;
+    }
+}
+
+add_filter( 'manage_edit-actividades_sortable_columns', 'set_custom_actividades_sortable_columns' );
+
+function set_custom_actividades_sortable_columns( $columns ) {
+    $columns['tipo-actividades'] = 'tipo-actividades';
+    $columns['qt_featured'] = 'qt_featured';
+
+    return $columns;
+}
+
+add_action( 'quick_edit_custom_box', 'quick_edit_add', 10, 2 );
+
+function quick_edit_add( $column_name, $post_type ) {
+    if ( 'qt_featured' != $column_name ) {
+        return;
+    }
+
+    if ( get_post_meta( get_the_ID(), 'qt_featured', 1 ) ) { 
+        $featured = 'checked';
+    } else {
+        $featured = '';
+    }
+    
+    printf( '
+        <input type="checkbox" name="qt_featured" class="qt_featured" %s> %s',
+           $featured,
+           __('Destacar Elemento', 'qanat')
+          );
+}
+
+add_action( 'save_post', 'save_quick_edit_data' );
+
+function save_quick_edit_data( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return $post_id;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) || 'actividades' != $_POST['post_type'] ) {
+        return $post_id;
+    }
+
+    $data = empty( $_POST['qt_featured'] ) ? '' : 'on';
+    update_post_meta( $post_id, 'qt_featured', $data );
+}
+
+add_action( 'admin_footer', 'quick_edit_javascript' );
+
+function quick_edit_javascript() {
+    global $current_screen;
+
+    if ( 'actividades' != $current_screen->post_type ) {
+        return;
+    }
+?>
+<script type="text/javascript">
+    function checked_headline_news(fieldValue) {
+        inlineEditPost.revert();
+        jQuery('.qt_featured').attr('checked', 0 == fieldValue ? false : true);
+    }
+
+</script>
+<?php
+}
+
+add_filter( 'post_row_actions', 'expand_quick_edit_link', 10, 2 );
+
+function expand_quick_edit_link( $actions, $post ) {
+    global $current_screen;
+
+    if ( 'actividades' != $current_screen->post_type ) {
+        return $actions;
+    }
+
+    $data                               = get_post_meta( $post->ID, 'qt_featured', true );
+    $data                               = empty( $data ) ? '': 'on';
+    $actions['inline hide-if-no-js']    = '<a href="#" class="editinline" title="';
+    $actions['inline hide-if-no-js']    .= esc_attr( 'Edit this item inline' ) . '"';
+    $actions['inline hide-if-no-js']    .= " onclick=\"checked_headline_news('{$data}')\" >";
+    $actions['inline hide-if-no-js']    .= 'Quick Edit';
+    $actions['inline hide-if-no-js']    .= '</a>';
+
+    return $actions;
 }

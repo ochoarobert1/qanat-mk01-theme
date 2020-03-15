@@ -73,42 +73,9 @@
 </footer>
 <?php $cookies_options = get_option('qanat_cookie_settings'); ?>
 <div class="qanat-privacy-policy-accept hidden-policy" id="qanat-privacy-policy-accept">
-    <p class="text-center small"><?php echo $cookies_options['cookie_text']; ?> <a href="<?php echo home_url('/cookies-policy/'); ?>" class="font-weight-bold"><?php _e( "aquí", 'qanat' ) ?></a>.</p>
+    <p class="text-center small"><?php echo $cookies_options['cookie_text']; ?> <a href="<?php echo get_permalink($cookies_options['cookie_link']); ?>" class="font-weight-bold"><?php _e( "aquí", 'qanat' ) ?></a>.</p>
     <div class="button-container">
-        <div class="cookies-multiple">
-            <label for="cookies_needed"><input type="checkbox" disabled checked required id="cookies_needed" name="cookies_needed" /> <?php _e('Necesarias', 'qanat'); ?></label>
-            <label for="cookies_preferences"><input type="checkbox" checked id="cookies_preferences" name="cookies_preferences" /> <?php _e('Preferencias', 'qanat'); ?></label>
-            <label for="cookies_stats"><input type="checkbox" disabled checked required id="cookies_stats" name="cookies_stats" /> <?php _e('Estadísticas', 'qanat'); ?></label>
-            <label for="cookies_marketing"><input type="checkbox" disabled checked required id="cookies_marketing" name="cookies_marketing" /> <?php _e('Marketing', 'qanat'); ?></label>
-            <a class="btn btn-multiple dropdown-toggle" data-toggle="collapse" href="#cookies_details" role="button" aria-expanded="false" aria-controls="cookies_details"><?php _e('Mostrar Detalles', 'qanat'); ?></a>
-        </div>
-        <a class="btn btn-sm btn-outline-elephant btn-privacy" id="privacy-policy-accept-btn"><?php _e( "Yo Acepto", 'qanat' ) ?></a>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="cookies_details">
-                <div class="card card-body">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><?php _e('Necesarias', 'qanat'); ?></a>
-                                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><?php _e('Preferencias', 'qanat'); ?></a>
-                                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><?php _e('Estadísticas', 'qanat'); ?></a>
-                                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><?php _e('Marketing', 'qanat'); ?></a>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a class="btn btn-sm btn-outline-elephant btn-privacy" id="privacy-policy-accept-btn"><?php _e( "Acepto", 'qanat' ) ?></a>
     </div>
 </div>
 <?php wp_footer() ?>

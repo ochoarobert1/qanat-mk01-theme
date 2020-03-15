@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ingeniería Qanat [Mk.01]\n"
-"POT-Creation-Date: 2020-03-08 16:57-0400\n"
-"PO-Revision-Date: 2020-03-08 16:57-0400\n"
+"POT-Creation-Date: 2020-03-14 20:59-0400\n"
+"PO-Revision-Date: 2020-03-14 20:59-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -93,29 +93,9 @@ msgstr "Click to call our master"
 msgid "aquí"
 msgstr "here"
 
-#: footer.php:79 footer.php:94
-msgid "Necesarias"
-msgstr "Necessary"
-
-#: footer.php:80 footer.php:95
-msgid "Preferencias"
-msgstr "Preferences"
-
-#: footer.php:81 footer.php:96
-msgid "Estadísticas"
-msgstr "Statistics"
-
-#: footer.php:82 footer.php:97
-msgid "Marketing"
-msgstr "Marketing"
-
-#: footer.php:83
-msgid "Mostrar Detalles"
-msgstr "Show Details"
-
-#: footer.php:85
-msgid "Yo Acepto"
-msgstr "I Accept"
+#: footer.php:78
+msgid "Acepto"
+msgstr "Agree"
 
 #: front-page.php:97 taxonomy-tipo-actividades.php:35
 msgid "Ver Más"
@@ -177,6 +157,22 @@ msgstr "Qanat Engineering - Contact Message"
 #: functions.php:302
 msgid "Sent"
 msgstr "Sent"
+
+#: functions.php:405
+msgid "Destacado"
+msgstr "Highlighted"
+
+#: functions.php:417
+msgid "Si"
+msgstr "Yes"
+
+#: functions.php:417
+msgid "No"
+msgstr "No"
+
+#: functions.php:447 includes/custom-metabox-actividades.php:15
+msgid "Destacar Elemento"
+msgstr "Highlight Element"
 
 #: header.php:72
 msgid "Visíta nuestra página de Facebook"
@@ -736,11 +732,11 @@ msgstr "Enter the pre-team text here"
 
 #: includes/custom-metabox-about.php:73
 msgid "Equipo\""
-msgstr "Team"
+msgstr "Team\""
 
 #: includes/custom-metabox-about.php:75 includes/custom-metabox-calidad.php:18
 msgid "Item {#}"
-msgstr "Item s/he/he/she/they/they/they"
+msgstr "Item {#}"
 
 #: includes/custom-metabox-about.php:76 includes/custom-metabox-calidad.php:19
 msgid "Agregar Item"
@@ -815,6 +811,14 @@ msgstr "Download"
 #: includes/custom-metabox-about.php:151
 msgid "Remover"
 msgstr "Remove"
+
+#: includes/custom-metabox-actividades.php:4
+msgid "Actividades - Información Extra"
+msgstr "Activities - Extra Information"
+
+#: includes/custom-metabox-actividades.php:16
+msgid "Haga click aqui para destacar este elemento y que aparezca en el Home"
+msgstr "Click here to highlight this item and make it appear on the Home"
 
 #: includes/custom-metabox-calidad.php:4
 msgid "Calidad: Información Extra"
@@ -1668,3 +1672,18 @@ msgid ""
 msgstr ""
 "http://www.robertochoa.com.ve/?"
 "utm_source=theme&utm_medium=link&utm_content=qanat"
+
+#~ msgid "Necesarias"
+#~ msgstr "Necessary"
+
+#~ msgid "Preferencias"
+#~ msgstr "Preferences"
+
+#~ msgid "Estadísticas"
+#~ msgstr "Statistics"
+
+#~ msgid "Marketing"
+#~ msgstr "Marketing"
+
+#~ msgid "Mostrar Detalles"
+#~ msgstr "Show Details"

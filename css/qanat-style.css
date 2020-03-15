@@ -1296,7 +1296,7 @@ about-hero-section .about-hero-post-info {
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .qanat-privacy-policy-accept .button-container .btn-privacy {
   cursor: pointer;

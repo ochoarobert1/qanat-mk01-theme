@@ -41,7 +41,11 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
+                        <?php if (get_locale() == 'es_ES') { ?>
                         <?php $contact_page = get_page_by_path('contacto'); ?>
+                        <?php } else { ?>
+                        <?php $contact_page = get_page_by_path('contact-us'); ?>
+                        <?php } ?>
                         <?php $text_form = get_post_meta($contact_page->ID, 'qt_checkbox_accept_text', true); ?>
                         <?php echo apply_filters('the_content', $text_form); ?>
                     </div>

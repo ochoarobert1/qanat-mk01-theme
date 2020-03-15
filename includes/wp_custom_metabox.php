@@ -260,6 +260,7 @@ function qanat_register_custom_metabox() {
     /* QUIENES SOMOS */
     require_once('custom-metabox-about.php');
     require_once('custom-metabox-clientes.php');
+    require_once('custom-metabox-actividades.php');
     require_once('custom-metabox-calidad.php');
     require_once('custom-metabox-publications.php');
     require_once('custom-metabox-contact.php');

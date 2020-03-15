@@ -86,7 +86,7 @@
                         </div>
                         <div class="act-home-container col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                             <div class="card-columns custom-card-columns">
-                                <?php $args = array('post_type' => 'actividades', 'posts_per_page' => 6, 'order' => 'DESC', 'orderby' => 'date' ); ?>
+                                <?php $args = array('post_type' => 'actividades', 'posts_per_page' => 6, 'order' => 'DESC', 'orderby' => 'date',  'meta_query' => array( array( 'key' => 'qt_featured', 'value' => 'on', 'compare' => '=' ))); ?>
                                 <?php $array_act = new WP_Query($args); ?>
                                 <?php if ($array_act->have_posts()) : ?>
                                 <?php while ($array_act->have_posts()) : $array_act->the_post(); ?>
