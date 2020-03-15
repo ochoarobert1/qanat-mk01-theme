@@ -19,17 +19,17 @@
     <?php /* FAVICONS */ ?>
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/images/apple-touch-icon.png" />
     <?php /* THEME NAVBAR COLOR */ ?>
-    <meta name="msapplication-TileColor" content="#454545" />
+    <meta name="msapplication-TileColor" content="#86b999" />
     <meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/images/win8-tile-icon.png" />
-    <meta name="theme-color" content="#454545" />
+    <meta name="theme-color" content="#86b999" />
     <?php /* AUTHOR INFORMATION */ ?>
     <meta name="language" content="<?php echo get_bloginfo('language'); ?>" />
-    <meta name="author" content="ADMIN_SITIO" />
-    <meta name="copyright" content="DIRECCION_URL" />
-    <meta name="geo.position" content="10.333333;-67.033333" />
-    <meta name="ICBM" content="10.333333, -67.033333" />
-    <meta name="geo.region" content="VE" />
-    <meta name="geo.placename" content="DIRECCION_AUTOR" />
+    <meta name="author" content="Qanat Ingeniería" />
+    <meta name="copyright" content="https://qanatingenieria.com" />
+    <meta name="geo.position" content="40.4914362,-3.6099701" />
+    <meta name="ICBM" content="40.4914362,-3.6099701" />
+    <meta name="geo.region" content="ES" />
+    <meta name="geo.placename" content="Calle José Antonio Fernández Ordoñez, 35 - 2°B 28055 Madrid" />
     <meta name="DC.title" content="<?php if (is_home()) { echo get_bloginfo('name') . ' | ' . get_bloginfo('description'); } else { echo get_the_title() . ' | ' . get_bloginfo('name'); } ?>" />
     <?php /* MAIN TITLE - CALL HEADER MAIN FUNCTIONS */ ?>
     <?php wp_title('|', false, 'right'); ?>
